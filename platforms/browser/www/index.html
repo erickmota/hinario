@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        
+<!--        Calling css jquery mobile-->
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css">
+        
+<!--        Calling Jquery js-->
+        <script src="js/jquery.js"></script>
+        <script src="js/jquery.mobile-1.4.5.js"></script>
+        
+<!--        Calling bootstrap css-->
+        <link rel="stylesheet" href="css/bootstrap.css">
+        
+<!--        Calling bootstrap js-->
+        <script src="js/bootstrap.js"></script>
+        
+<!--        Calling main css-->
+        <link rel="stylesheet" href="css/index.css">
+        
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+        <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+        <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" />
+        
+    </head>
+    
+    <body>
+        
+<!--        Arquivos necessários para o cordova-->
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        
+<!--        Teste de banco de dados-->
+        <script type="text/javascript">
+            
+            app.initialize();
+
+            var db = window.openDatabase("Database", "1.0", "hinario", 2000000);
+            db.transaction(createDB, errorDB, successDB);
+            db.transaction(verificar_dados_bd_view, errorDB, successDB);
+            configuracoes_view();
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            function onDeviceReady(){
+
+                db.transaction(createDB, errorDB, successDB);
+            }
+
+            function errorDB(err){
+                alert("Erro: "+err);
+            }
+            function successDB(){
+                
+                
+                
+            }
+
+            //Criar a tabela se a mesma não existir    
+            function createDB(tx){
+                tx.executeSql('CREATE TABLE IF NOT EXISTS hinos (id INTEGER PRIMARY KEY, numero INTEGER, nome VARCHAR(50), texto TEXT, categoria VARCHAR(50), favorito INTEGER )');
+                tx.executeSql('CREATE TABLE IF NOT EXISTS configuracoes (id INTEGER PRIMARY KEY, tamanho_fonte INTEGER )');
+            }
+            
+            //            Verificando se os dados já estão no BD
+            function verificar_dados_bd_view(){
+                db.transaction(verificar_dados_bd_view_db, errorDB, successDB);
+            }
+            function verificar_dados_bd_view_db(tx){
+                tx.executeSql('SELECT * FROM configuracoes', [], verificar_dados_bd_view_data, errorDB);
+            }
+            function verificar_dados_bd_view_data(tx, resultado){
+                
+                var len = resultado.rows.length;
+                    
+                if(len === 0){
+                        
+                    hino_insert();
+                    
+                }
+                
+            }
+            
+            function hino_insert(){
+                
+                db.transaction(hino_insert_db, errorDB, successDB);
+                
+            }
+            
+//            Inserindo hinos e dados iniciais na tabela
+            function hino_insert_db(tx){
+
+//                Hino 1
+                var numero1 = 1;
+                var nome1 = "Aba, Pai, a Ti Chegamos";
+                var texto1 = "<p>Aba, Pai! A Ti chegamos, hoje, em nome de Jesus,<br>Deus e Pai a Ti chamamos, sendo filhos já da luz.<br>Dos delitos libertados, pelo sangue do Senhor;<br>Pelo Espírito ensinados, damos-Te real louvor.</p><p>Fomos como fugitivos, longe do paterno lar,<br>Mas, quais filhos redimidos, nos quiseste abençoar.<br>Por amor nos perdoaste, nos levaste para Ti;<br>Nos beijaste, nos sentaste à paterna mesa aqui.</p><p>Já por Tuas mãos vestidos com os trajes de favor,<br>Dentro em casa recolhidos desfrutamos Teu amor.<br>Redimidos e lavados, renascidos para Deus;<br>Restaurados, bem amados, feitos cidadãos dos céus.</p><p>Aba, aqui, nós Te adoramos, muito alegres por saber<br>Que por nós que em Cristo estamos, vão Teus anjos conhecer<br>Teu saber maravilhoso, Tua graça, Teu amor;<br>E movidos de alegria Te adorar com novo ardor.</p>";
+                var categoria1 = "Adoração e Louvor";
+
+                tx.executeSql('INSERT INTO hinos (numero, nome, texto, categoria, favorito) VALUES ("'+ numero1 +'", "'+ nome1 +'", "'+ texto1 +'", "'+ categoria1 +'", 0)');
+                
+//                Hino 2
+                var numero2 = 2;
+                var nome2 = "Foi Nessa Noite Escura";
+                var texto2 = "<p>Foi nessa noite escura que Tu, Senhor Jesus,<br>Com Tu'alma já afligida prevendo Tua cruz,<br>Amando nos pediste: 'Fazei assim por Mim';<br>De coração fervente Te recordamos sim.</p><p>Teu coração sofrendo - imensa foi a dor!<br>Bebeste por nós toda a taça de amargor,<br>Lá, quando no Calvário, Teu Deus Te abandonou;<br>Com gratidão lembramos que assim nos perdoou.</p><p>Imóvel, em tormento, estavas Tu ali,<br>'As ondas e as vagas' passando sobre Ti;<br>Tão infinita graça, amor em perfeição,<br>Com gozo e real tristeza, recorda o coração.</p><p>Já dentre os mortos, Cristo, ressuscitado estás!<br>Te vemos lá em glória, Autor de nossa paz;<br>Por graça em Ti aceitos, gozando filiação,<br>Lembramos Tua pena, amor e submissão.</p><p>Pois até que Tu venhas chamar-nos, ó Senhor!<br>Pra onde o dia brilha e eterno é o esplendor,<br>Queremos Tua morte aqui anunciar,<br>E a ela conformados, Teu nome recordar!</p>";
+                var categoria2 = "Adoração e Louvor";
+
+                tx.executeSql('INSERT INTO hinos (numero, nome, texto, categoria, favorito) VALUES ("'+ numero2 +'", "'+ nome2 +'", "'+ texto2 +'", "'+ categoria2 +'", 0)');
+                
+//                Hino 3
+                var numero3 = 3;
+                var nome3 = "Todos Juntos Adoremos";
+                var texto3 = "<p>Todos juntos, adoremos,<br>Ao Senhor, a Quem devemos<br>Tudo, tudo quanto temos,<br>Nosso Salvador!</p><p>Sejas, ó Senhor, louvado,<br>Tu que aqui foste humilhado,<br>E por nós crucificado,<br>Nosso Salvador!</p><p>Ó Jesus! Tu nos buscaste,<br>Com Teu sangue nos compraste,<br>Por amor, Tu nos ganhaste,<br>Nosso Salvador!</p><p>E a Ti, Pai, confessamos<br>Que outro nome não achamos,<br>Como o Filho a Quem honramos,<br>Nosso Salvador!</p><p>Tudo a Ele entregaste,<br>Tu, ó Pai, O exaltaste;<br>À direita O sentaste,<br>Nosso Salvador!</p><p>Toda graça n’Ele achamos,<br>Tudo quanto precisamos;<br>N’Ele sempre nos gloriamos,<br>Nosso Salvador!</p><p>Mais um pouco e O veremos,<br>Para os céus nós subiremos;<br>Sua glória, gozaremos,<br>Nosso Salvador</p>";
+                var categoria3 = "Adoração e Louvor";
+
+                tx.executeSql('INSERT INTO hinos (numero, nome, texto, categoria, favorito) VALUES ("'+ numero3 +'", "'+ nome3 +'", "'+ texto3 +'", "'+ categoria3 +'", 1)');
+                
+//                Hino 4
+                var numero4 = 4;
+                var nome4 = "Jesus, Senhor Amado!";
+                var texto4 = "<p>Jesus, Senhor amado! Formamos nós aqui,<br>Com todos os remidos, um mesmo corpo em Ti.<br>Guardando a unidade no vínculo da paz,<br>O Espírito nos une Contigo e gozo traz.</p><p>Que gozo nós chegarmos a Ti, Jesus Senhor,<br>E sermos dirigidos por Teu Consolador;<br>Teu Livro possuindo pra nos iluminar,<br>Podermos, reverentes, adoração Te dar.</p><p>Cercando a Tua ceia que nos puseste aqui,<br>Recordação tão santa Senhor Jesus, de Ti.<br>Da cruz até a glória, quão bom nos é seguir<br>Os passos gloriosos de Quem nos quis remir!</p><p>Louvamos, adoramos, de unido coração,<br>E alegres entoamos com viva gratidão,<br>As Tuas santas glórias, ó Cristo Salvador!<br>Cabeça que és da Igreja, manancial de amor!</p>";
+                var categoria4 = "Adoração e Louvor";
+
+                tx.executeSql('INSERT INTO hinos (numero, nome, texto, categoria, favorito) VALUES ("'+ numero4 +'", "'+ nome4 +'", "'+ texto4 +'", "'+ categoria4 +'", 0)');
+                
+//                Hino 5
+                var numero5 = 5;
+                var nome5 = "Senhor, Hoje Lembrando";
+                var texto5 = "<p>Senhor, hoje lembrando com grato coração,<br>Tomamos Tua ceia com simples devoção;<br>Do pão, com reverência comemos, Salvador,<br>Lembrando de Teu corpo entregue por amor.</p><p>Mas antes de parti-lo, pensamos logo em Ti,<br>Que nós, embora muitos, somos `um corpo` aqui.<br>O vinho que tomamos, nos traz recordação<br>Do sangue derramado, que nos trouxe perdão.</p><p>Comemos e bebemos conscientes do valor<br>Da obra consumada, eterna em seu vigor;<br>Em Tal presença santa celebra o coração,<br>E até que Tu venhas, levar-nos à mansão.</p>";
+                var categoria5 = "Adoração e Louvor";
+
+                tx.executeSql('INSERT INTO hinos (numero, nome, texto, categoria, favorito) VALUES ("'+ numero5 +'", "'+ nome5 +'", "'+ texto5 +'", "'+ categoria5 +'", 0)');
+                
+//                Hino 6
+                var numero6 = 6;
+                var nome6 = "Nesta Ceia Nos Juntamos";
+                var texto6 = "<p>Nesta ceia nos juntamos anunciando, ó Senhor,<br>Tua morte até que venhas, exaltando Teu amor.<br>Grande amor! Grande amor!<br>Exaltando Teu amor.</p><p>Redimidos já entramos, com mui gozo à comunhão.<br>Neste pão Te recordamos, Cristo, nossa salvação.<br>Salvação! Salvação!<br>Cristo, nossa Salvação.</p><p>Nesta taça confessamos que Teu sangue é eficaz,<br>Uma expiação perfeita que nos veio dar a paz.<br>Dar a paz! Dar a paz!<br>Que nos veio dar a paz.</p><p>Tua graça nos congrega nesta mesa com amor,<br>Em espírito cantamos sempre a Ti, ó Redentor!<br>Redentor! Redentor!<br>Sempre a Ti,ó Redentor!</p>";
+                var categoria6 = "Adoração e Louvor";
+
+                tx.executeSql('INSERT INTO hinos (numero, nome, texto, categoria, favorito) VALUES ("'+ numero6 +'", "'+ nome6 +'", "'+ texto6 +'", "'+ categoria6 +'", 0)');
+                
+//                Hino 7
+                var numero7 = 7;
+                var nome7 = "Quão Imensa Foi a Graça!";
+                var texto7 = "<p>Quão imensa foi a graça,<br>Ao morrerdes numa cruz;<br>Nós, outrora, tão errantes,<br>Em Ti, Cristo, vimos Luz!</p><p><b><i>Ó Cordeiro, de Deus Filho,<br>Te louvamos Salvador;<br>E sabemos que Teu brilho<br>Nos farás ver, em fulgor!</i></b></p><p>A sentença foi lançada<br>Em quem Deus quis entregar;<br>Sem detença, ao Calvário,<br>Tu subiste pra salvar.</p><p><b><i>Ó Cordeiro, de Deus Filho,<br>Te louvamos Salvador;<br>E sabemos que Teu brilho<br>Nos farás ver, em fulgor!</i></b></p><p>Em pecado foste feito,<br>Por nós, tão vis, lá na cruz;<br>O juízo recebeste,<br>Dando-nos a paz, Jesus.</p><p><b><i>Ó Cordeiro, de Deus Filho,<br>Te louvamos Salvador;<br>E sabemos que Teu brilho<br>Nos farás ver, em fulgor!</i></b></p>";
+                var categoria7 = "Adoração e Louvor";
+
+                tx.executeSql('INSERT INTO hinos (numero, nome, texto, categoria, favorito) VALUES ("'+ numero7 +'", "'+ nome7 +'", "'+ texto7 +'", "'+ categoria7 +'", 0)');
+                
+//                Inserindo tamanho da fonte no BD
+                tx.executeSql("INSERT INTO configuracoes (tamanho_fonte) VALUES (16)");
+                
+                document.location.reload();
+                
+            }
+
+
+            //Efetua a leitura do banco de dados para os hinos de "Adoração e Louvor"
+            function hino_view(){
+                db.transaction(hino_view_db, errorDB, successDB);
+            }
+            function hino_view_db(tx){
+                tx.executeSql('SELECT * FROM hinos', [], hino_view_data, errorDB);
+            }
+            function hino_view_data(tx, results){
+
+                var len = results.rows.length;
+
+                for (var i=0; i<2; i++){
+                    
+                    if(results.rows.item(i).favorito === 1){
+                        
+                        $("#tabelaHinos").append("<tr>"+
+                                                "<th scope='row'>" + results.rows.item(i).numero + "</th>"+
+                                                "<td><a href='#paginaHinos' data-transition='slide' class='font-weight-normal text-dark linkHome' onclick='hino_isolado("+ results.rows.item(i).numero +")'>" + results.rows.item(i).nome + "</a></td>"+
+                                                "<td>"+
+                                                    "<img onclick='desfavorita_musica("+ results.rows.item(i).numero +");' id='imgEstrelaCinza"+ results.rows.item(i).numero +"' src='img/iconGreenStar.png' class='float-right starGray'>"+
+                                                "</td>"+
+                                              "</tr>");
+                        
+                    }else{
+                        
+                        $("#tabelaHinos").append("<tr>"+
+                                                "<th scope='row'>" + results.rows.item(i).numero + "</th>"+
+                                                "<td><a href='#paginaHinos' data-transition='slide' class='font-weight-normal text-dark linkHome' onclick='hino_isolado("+ results.rows.item(i).numero +")'>" + results.rows.item(i).nome + "</a></td>"+
+                                                "<td>"+
+                                                    "<img onclick='favorita_musica("+ results.rows.item(i).numero +");' id='imgEstrelaCinza"+ results.rows.item(i).numero +"' src='img/iconGrayStar.png' class='float-right starGray'>"+
+                                                "</td>"+
+                                              "</tr>");
+                        
+                    }
+                    
+                }
+            }
+            
+            //Efetua a leitura do banco de dados para os hinos de "Oração, Vida e Esperança do Cristão"
+            function hino_view2(){
+                db.transaction(hino_view_db2, errorDB, successDB);
+            }
+            function hino_view_db2(tx){
+                tx.executeSql('SELECT * FROM hinos', [], hino_view_data2, errorDB);
+            }
+            function hino_view_data2(tx, results){
+
+                var len = results.rows.length;
+
+                for (var i=2; i<4; i++){
+                    
+                    if(results.rows.item(i).favorito === 1){
+                        
+                        $("#tabelaHinos2").append("<tr>"+
+                                                "<th scope='row'>" + results.rows.item(i).numero + "</th>"+
+                                                "<td><a href='#paginaHinos' data-transition='slide' class='font-weight-normal text-dark linkHome' onclick='hino_isolado("+ results.rows.item(i).numero +")'>" + results.rows.item(i).nome + "</a></td>"+
+                                                "<td>"+
+                                                    "<img onclick='desfavorita_musica("+ results.rows.item(i).numero +");' id='imgEstrelaCinza"+ results.rows.item(i).numero +"' src='img/iconGreenStar.png' class='float-right starGray'>"+
+                                                "</td>"+
+                                              "</tr>");
+                        
+                    }else{
+                        
+                        $("#tabelaHinos2").append("<tr>"+
+                                                "<th scope='row'>" + results.rows.item(i).numero + "</th>"+
+                                                "<td><a href='#paginaHinos' data-transition='slide' class='font-weight-normal text-dark linkHome' onclick='hino_isolado("+ results.rows.item(i).numero +")'>" + results.rows.item(i).nome + "</a></td>"+
+                                                "<td>"+
+                                                    "<img onclick='favorita_musica("+ results.rows.item(i).numero +");' id='imgEstrelaCinza"+ results.rows.item(i).numero +"' src='img/iconGrayStar.png' class='float-right starGray'>"+
+                                                "</td>"+
+                                              "</tr>");
+                        
+                    }
+                    
+                }
+            }
+            
+            //Efetua a leitura do banco de dados para os hinos de "Experiência Pessoal"
+            function hino_view3(){
+                db.transaction(hino_view_db3, errorDB, successDB);
+            }
+            function hino_view_db3(tx){
+                tx.executeSql('SELECT * FROM hinos', [], hino_view_data3, errorDB);
+            }
+            function hino_view_data3(tx, results){
+
+                var len = results.rows.length;
+
+                for (var i=4; i<7; i++){
+                    
+                    if(results.rows.item(i).favorito === 1){
+                        
+                        $("#tabelaHinos3").append("<tr>"+
+                                                "<th scope='row'>" + results.rows.item(i).numero + "</th>"+
+                                                "<td><a href='#paginaHinos' data-transition='slide' class='font-weight-normal text-dark linkHome' onclick='hino_isolado("+ results.rows.item(i).numero +")'>" + results.rows.item(i).nome + "</a></td>"+
+                                                "<td>"+
+                                                    "<img onclick='desfavorita_musica("+ results.rows.item(i).numero +");' id='imgEstrelaCinza"+ results.rows.item(i).numero +"' src='img/iconGreenStar.png' class='float-right starGray'>"+
+                                                "</td>"+
+                                              "</tr>");
+                        
+                    }else{
+                        
+                        $("#tabelaHinos3").append("<tr>"+
+                                                "<th scope='row'>" + results.rows.item(i).numero + "</th>"+
+                                                "<td><a href='#paginaHinos' data-transition='slide' class='font-weight-normal text-dark linkHome' onclick='hino_isolado("+ results.rows.item(i).numero +")'>" + results.rows.item(i).nome + "</a></td>"+
+                                                "<td>"+
+                                                    "<img onclick='favorita_musica("+ results.rows.item(i).numero +");' id='imgEstrelaCinza"+ results.rows.item(i).numero +"' src='img/iconGrayStar.png' class='float-right starGray'>"+
+                                                "</td>"+
+                                              "</tr>");
+                        
+                    }
+                    
+                }
+            }
+            
+            function hino_isolado(hino){
+                
+                $("#numeroEscondido").val(hino);
+                $("#audio").attr("src", "https://anotacoesbiblicas.com/hinar.io/"+ hino +".mp3");
+                
+                hino_isolado_view();
+                
+            }
+            
+            //Efetua a leitura do banco de dados de hinos isolados
+            function hino_isolado_view(){
+                db.transaction(hino_isolado_view_db, errorDB, successDB);
+            }
+            function hino_isolado_view_db(tx){
+                
+                var numero = $("#numeroEscondido").val();
+                
+                tx.executeSql("SELECT * FROM hinos WHERE numero="+ numero +"", [], hino_isolado_view_data, errorDB);
+            }
+            function hino_isolado_view_data(tx, results){
+                
+//                Limpa a área do hino
+                $("#espacoHinoIsolado").empty();
+                
+                var tamanho_fonte = $("#tamanhoFonteEscondido").val();
+                $("#espacoHinoIsolado").css({"font-size":""+ tamanho_fonte+"px"});
+
+                var len = results.rows.length;
+
+                for (var i=0; i<len; i++){
+                    
+                    $("#espacoHinoIsolado").append("<p class='text-center tituloAdoracao'><b>"+ results.rows.item(i).numero +" - "+ results.rows.item(i).nome +"</b><br><small class='text-black-50 font-weight-light'>("+ results.rows.item(i).categoria +")</small></p><p>"+ results.rows.item(i).texto +"</p>");
+                    
+                }
+            }
+            
+            //Efetua a leitura nas configuraçoes
+            function configuracoes_view(){
+                db.transaction(configuracoes_view_db, errorDB, successDB);
+            }
+            function configuracoes_view_db(tx){
+                
+                tx.executeSql("SELECT * FROM configuracoes", [], configuracoes_view_data, errorDB);
+            }
+            function configuracoes_view_data(tx, results){
+
+                var len = results.rows.length;
+
+                for (var i=0; i<len; i++){
+                    
+                    $("#tamanhoFonteEscondido").val(results.rows.item(i).tamanho_fonte);
+                    
+                }
+            }
+            
+//            Função para dar play no música
+            function play_musica(){
+                
+                $("#iconePlay").addClass("d-none");
+                $("#iconeStop").removeClass("d-none");
+                
+                var musica = document.getElementById("audio");
+                
+                musica.play();
+                
+            }
+            
+//            Função para dar stop na música
+            function stop_musica(){
+                
+                $("#iconePlay").removeClass("d-none");
+                $("#iconeStop").addClass("d-none");
+                
+                var musica = document.getElementById("audio");
+                
+                musica.pause();
+                musica.currentTime = 0;
+                
+            }
+            
+//            Função para aumentar tamanho da fonte
+            function aumenta_fonte_hino(){
+                
+                var tamanho_fonte_aumentar = parseInt($("#tamanhoFonteEscondido").val()) + parseInt(2);
+                $("#tamanhoFonteEscondido").val(tamanho_fonte_aumentar);
+                atualiza_tamanho_fonte();
+                $("#espacoHinoIsolado").css({"font-size":""+ tamanho_fonte_aumentar +"px"});
+                
+            }
+            
+//            Função para diminuir tamanho da fonte
+            function diminui_fonte_hino(){
+                
+                var tamanho_fonte_diminuir = parseInt($("#tamanhoFonteEscondido").val()) - parseInt(2);
+                $("#tamanhoFonteEscondido").val(tamanho_fonte_diminuir);
+                atualiza_tamanho_fonte();
+                $("#espacoHinoIsolado").css({"font-size":""+ tamanho_fonte_diminuir +"px"});
+                
+            }
+            
+            //Atualiza tamanho da fonte no BD
+            function atualiza_tamanho_fonte(){
+                db.transaction(atualiza_tamanho_fonte_db, errorDB, successDB);
+            }
+            function atualiza_tamanho_fonte_db(tx){
+                
+                var tamanho_fonte = $("#tamanhoFonteEscondido").val();
+                
+                tx.executeSql("UPDATE configuracoes SET tamanho_fonte = "+ tamanho_fonte +"");
+            }
+            
+//            Função para favoritar a música, ao clicar na estrela
+            function favorita_musica(musica){
+                
+                $("#favoritaEscondido").val(musica);
+                
+                favorita_musicabd();
+                
+                $("#imgEstrelaCinza"+ musica +"").attr("src", "img/iconGreenStar.png");
+                $("#imgEstrelaCinza"+ musica +"").attr("onclick", "desfavorita_musica("+ musica +")");
+                
+            }
+            
+//            Função para desfavoritar uma música
+            function desfavorita_musica(musica){
+                
+                $("#favoritaEscondido").val(musica);
+                
+                desfavorita_musicabd();
+                
+                $("#imgEstrelaCinza"+ musica +"").attr("src", "img/iconGrayStar.png");
+                $("#imgEstrelaCinza"+ musica +"").attr("onclick", "favorita_musica("+ musica +")");
+                
+            }
+            
+            //Favorita musicas no BD
+            function favorita_musicabd(){
+                db.transaction(favorita_musicabd_db, errorDB, successDB);
+            }
+            function favorita_musicabd_db(tx){
+                
+                var musica = $("#favoritaEscondido").val();
+                
+                tx.executeSql("UPDATE hinos SET favorito=1 WHERE numero="+ musica +"");
+            }
+            
+            //Desfavorita musicas no BD
+            function desfavorita_musicabd(){
+                db.transaction(desfavorita_musicabd_db, errorDB, successDB);
+            }
+            function desfavorita_musicabd_db(tx){
+                
+                var musica = $("#favoritaEscondido").val();
+                
+                tx.executeSql("UPDATE hinos SET favorito=0 WHERE numero="+ musica +"");
+            }
+            
+        </script>
+        
+<!-- Start of first page -->
+        <div data-role="page" class="fullPage" id="paginaPrincipal">
+
+            <div class="container-fluid">
+                
+<!--                Start main bar-->
+                <div class="row blueBar">
+                    
+                    <div class="col text-center text-white">
+                        
+                        <input id="favoritaEscondido" type="hidden">
+                        
+                        <h5 class="textTitleBlueBar">Hinário</h5>
+                        
+                    </div>
+                    
+                </div>
+
+<!--                Adoração e Louvor-->
+                <h6 class="text-center mb-4 tituloAdoracao">
+
+                    Adoração e Louvor
+
+                </h6>
+
+                <table class="table">
+                    
+                    <tbody id="tabelaHinos">
+                        
+                    <script>
+                        
+                        hino_view();
+                        
+                    </script>
+                      
+                    </tbody>
+                    
+                </table>
+
+<!--                Oração, Vida e Esperança do Cristão-->
+                <h6 class="text-center mb-4 mt-5">
+
+                    Oração, Vida e Esperança do Cristão
+
+                </h6>
+
+                <table class="table">
+                    
+                    <tbody id="tabelaHinos2">
+                        
+                    <script>
+                        
+                        hino_view2();
+                        
+                    </script>
+                      
+                    </tbody>
+                    
+                </table>
+
+<!--                Experiência pessoa-->
+                <h6 class="text-center mt-5 mb-4">
+
+                    Experiência Pessoal
+
+                </h6>
+
+                <table class="table">
+                    
+                    <tbody id="tabelaHinos3">
+                        
+                    <script>
+                        
+                        hino_view3();
+                        
+                    </script>
+                      
+                    </tbody>
+                    
+                </table>
+                
+            </div>
+            
+        </div><!-- /page -->
+        
+<!-- Página dos hinos -->
+        <div data-role="page" class="fullPage" id="paginaHinos">
+
+            <div class="container-fluid">
+                
+<!--                Start main bar-->
+                <div class="row blueBar">
+                    
+                    <div class="col text-center text-white">
+                        
+                        <input id="numeroEscondido" type="hidden">
+                        <input id="tamanhoFonteEscondido" type="hidden">
+                        
+                        <h5 class="textTitleBlueBar">Hinário</h5>
+                        
+                    </div>
+                    
+                </div>
+            
+<!--            Aqui é o espaço onde fica o hino isolado-->
+            <div style="" class="espacoHinoIsolado text-center" id="espacoHinoIsolado"></div>
+            
+            <div class="row barraPlay">
+                
+                <div class="col-4 text-center">
+                    
+                    <img class="iconeMais" onclick="diminui_fonte_hino()" src="img/iconeMenos.png" width="25px">
+                    
+                </div>
+                
+                <div class="col-4 text-center text-white">
+                        
+                    <img onclick="stop_musica()" id="iconeStop" class="d-none imgIconePlay" src="img/iconeStop.png" width="60px">
+                    <img onclick="play_musica()" id="iconePlay" class="imgIconePlay" src="img/iconePlay.png" width="60px">
+                    
+                    <audio id="audio" src=""></audio>
+                        
+                </div>
+                
+                <div class="col-4 text-center text-white">
+                    
+                    <img class="iconeMenos" onclick="aumenta_fonte_hino()" src="img/iconeMais.png" width="25px">
+                    
+                </div>
+                
+            </div>
+                
+            </div>
+            
+        </div><!-- /page -->
+        
+    </body>
+    
+</html>

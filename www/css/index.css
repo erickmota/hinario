@@ -1,0 +1,478 @@
+/* need start this class each new page created, for remove the text's shadow of page' */
+.fullPage{
+    
+    text-shadow: none;
+    
+}
+
+/* Area for all of the blue bar */
+.blueBar{
+    
+    background-color: #007bff;
+    height: 50px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    
+}
+
+.textTitleBlueBar{
+    
+    margin-top: 12px;
+    
+}
+
+.iconeSom{
+
+    margin-top: 15px;
+    display: none;
+
+}
+
+.barraDeProgresso{
+
+    height: 5px;
+    position: fixed;
+    top: 50px;
+    width: 100%;
+    left: 0px;
+
+}
+
+.subBarraProgresso{
+
+    background-color: #0066ff;
+    height: 5px;
+    position: fixed;
+    top: 50px;
+    width: 0%;
+    left: 0px;
+
+}
+
+.imgSetaVoltar{
+
+    transform: rotate(90deg);
+    margin-top: 17px;
+
+}
+
+.imgMenu{
+
+    margin-top: 17px;
+
+}
+
+.imgLupa{
+
+    margin-top: 14px;
+
+}
+
+.inputBusca{
+
+    background-color: #007bff;
+    width: 100%;
+    height: 40px;
+    margin-top: 5px;
+    color: white;
+    border: none;
+
+}
+
+.inputBusca:focus{
+
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+
+}
+
+.inputBusca::-webkit-input-placeholder {
+
+    color: rgb(158, 188, 255);
+    font-size: 18px;
+
+ }
+
+/* Area for all of the balloon of the music */
+.starGray{
+    
+    width: 20px;
+    
+}
+
+.tituloAdoracao{
+    
+    margin-top: 70px;
+    
+}
+
+.linkHome:hover{
+    
+    text-decoration: none;
+    
+}
+
+/*Tudo da área do hino isolado*/
+.espacoHinoIsolado{
+    
+    margin-bottom: 70px;
+    
+}
+
+/*Area para tudo da barra de play*/
+.barraPlay{
+    
+    background-color: #007bff;
+    height: 40px;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    
+}
+
+.imgIconePlay{
+    
+    margin-top: -20px;
+    
+}
+
+.iconeMais{
+    
+    margin-top: 6px;
+    
+}
+
+.iconeMenos{
+    
+    margin-top: 6px;
+    transform: rotate(180deg)
+    
+}
+
+/* Tudo da área de busca */
+.tituloHinosBusca{
+
+    margin-top: 30px;
+
+}
+
+.tituloHinosBuscaIsolado{
+
+    margin-top: 0px;
+
+}
+
+.dicaBusca{
+
+    margin-top: 65px;
+
+}
+
+/* Menu principal */
+.espacoLogo{
+
+    width: 100%;
+    height: 70px;
+    background-color: #52a5ff;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    text-shadow: none;
+    color: white;
+
+}
+
+#divLogo{
+
+  float: left;
+  width: 50px;
+
+}
+
+#divSelect{
+
+  float: right;
+  width: 200px;
+
+}
+
+.logo{
+
+    margin-top: 15px;
+    margin-left: 15px;
+
+}
+
+.selectHinario{
+
+  width: 170px;
+  margin-top: 25px;
+  border: none;
+  background-color: #52a5ff;
+  color: white;
+  font-size: 18px;
+  margin-left: 10px;
+
+}
+
+.selectHinario:focus{
+
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+
+}
+
+.selectHinario::-webkit-input-placeholder {
+
+  color: rgb(158, 188, 255);
+  font-size: 18px;
+
+}
+
+.selectHinario option:focus{
+
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+
+}
+
+.corpoAB{
+
+    margin-top: 70px;
+
+}
+
+.logoAB{
+
+    margin-top: -3px;
+    border-radius: 50%;
+
+}
+
+.iconeEstrelaMenu{
+
+    margin-top: -5px;
+
+}
+
+.selectVoz{
+
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+    float: right;
+    background-color: #439eff;
+    color: white;
+
+}
+
+.selectVoz:focus{
+
+  box-shadow: 0 0 0 0;
+  border: 1px solid #BBB;
+  outline: 0;
+
+}
+
+/* Botão switch Reprodução Automática */
+.switch__container{
+
+    width: 40px;
+    margin-top: 8px;
+    float: right;
+
+}
+
+.switch {
+    position: absolute;
+    margin-left: -9999px;
+    visibility: hidden;
+  }
+  
+  .switch + label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+  }
+
+  .switch--shadow + label {
+    padding: 2px;
+    width: 40px;
+    height: 20px;
+    background-color: #dddddd;
+    border-radius: 60px;
+  }
+
+  .switch--shadow + label:before,
+.switch--shadow + label:after {
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  bottom: 1px;
+  content: '';
+}
+.switch--shadow + label:before {
+  right: 1px;
+  background-color: #f1f1f1;
+  border-radius: 60px;
+  transition: all 0.4s;
+}
+.switch--shadow + label:after {
+  width: 20px;
+  background-color: #fff;
+  border-radius: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s;
+}
+
+.switch--shadow:checked + label:before {
+    background-color: #439eff;
+  }
+  .switch--shadow:checked + label:after {
+    transform: translateX(18px);
+  }
+
+  /* Botão switch Reprodução Aleatória */
+.switch__container2{
+
+    width: 40px;
+    margin-top: 8px;
+    float: right;
+
+}
+
+.switch2 {
+    position: absolute;
+    margin-left: -9999px;
+    visibility: hidden;
+  }
+  
+  .switch2 + label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+  }
+
+  .switch--shadow2 + label {
+    padding: 2px;
+    width: 40px;
+    height: 20px;
+    background-color: #dddddd;
+    border-radius: 60px;
+  }
+
+  .switch--shadow2 + label:before,
+.switch--shadow2 + label:after {
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  bottom: 1px;
+  content: '';
+}
+.switch--shadow2 + label:before {
+  right: 1px;
+  background-color: #f1f1f1;
+  border-radius: 60px;
+  transition: all 0.4s;
+}
+.switch--shadow2 + label:after {
+  width: 20px;
+  background-color: #fff;
+  border-radius: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s;
+}
+
+.switch--shadow2:checked + label:before {
+    background-color: #439eff;
+  }
+  .switch--shadow2:checked + label:after {
+    transform: translateX(18px);
+  }
+
+  /* Botão switch Apenas Instrumental */
+.switch__container3{
+
+  width: 40px;
+  margin-top: 8px;
+  float: right;
+
+}
+
+.switch3 {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden;
+}
+
+.switch3 + label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+
+.switch--shadow3 + label {
+  padding: 2px;
+  width: 40px;
+  height: 20px;
+  background-color: #dddddd;
+  border-radius: 60px;
+}
+
+.switch--shadow3 + label:before,
+.switch--shadow3 + label:after {
+display: block;
+position: absolute;
+top: 1px;
+left: 1px;
+bottom: 1px;
+content: '';
+}
+.switch--shadow3 + label:before {
+right: 1px;
+background-color: #f1f1f1;
+border-radius: 60px;
+transition: all 0.4s;
+}
+.switch--shadow3 + label:after {
+width: 20px;
+background-color: #fff;
+border-radius: 100%;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+transition: all 0.4s;
+}
+
+.switch--shadow3:checked + label:before {
+  background-color: #439eff;
+}
+.switch--shadow3:checked + label:after {
+  transform: translateX(18px);
+}
+
+  /* Página sobre */
+  .rodapeSobre{
+
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+    background-color: white;
+
+  }
+
+  .corpoSobre{
+
+    margin-bottom: 100px;
+
+  }

@@ -1,0 +1,80 @@
+/* need start this class each new page created, for remove the text's shadow of page' */
+.fullPage{
+    
+    text-shadow: none;
+    background-color: white;
+    
+}
+
+/* Area for all of the blue bar */
+.blueBar{
+    
+    background-color: #007bff;
+    height: 50px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    
+}
+
+.textTitleBlueBar{
+    
+    margin-top: 11px;
+    
+}
+
+/* Area for all of the balloon of the music */
+.starGray{
+    
+    width: 20px;
+    
+}
+
+.tituloAdoracao{
+    
+    margin-top: 70px;
+    
+}
+
+.linkHome:hover{
+    
+    text-decoration: none;
+    
+}
+
+/*Tudo da área do hino isolado*/
+.espacoHinoIsolado{
+    
+    margin-bottom: 70px;
+    
+}
+
+/*Area para tudo da barra de play*/
+.barraPlay{
+    
+    background-color: #007bff;
+    height: 40px;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    
+}
+
+.imgIconePlay{
+    
+    margin-top: -20px;
+    
+}
+
+.iconeMais{
+    
+    margin-top: 6px;
+    
+}
+
+.iconeMenos{
+    
+    margin-top: 6px;
+    transform: rotate(180deg)
+    
+}
