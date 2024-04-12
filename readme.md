@@ -2,6 +2,8 @@
 
 O Hinário é um aplicativo criado para auxiliar os irmãos da assembléia a cantar, buscar e organizar os hínos como favoritos. No Hinário é possível selecionar entre hínos, salmos e hínos para crianças, todos com letras e alguns com o áudio, sendo possível escutar os hínos em ordem aleatória ou sequêncial, com voz ou apenas instrumental.
 
+Você pode baixar o app [clicando aqui](https://drive.google.com/drive/folders/14pMqyoX04N61cqYuGvB7pr1InZc_rHzI)
+
 ## Funcionalidades e recursos
 
 - Sistema de busca para verso, número e título
